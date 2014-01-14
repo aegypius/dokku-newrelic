@@ -1,3 +1,3 @@
-# dokku-plugin-newrelic
+# dokku-newrelic
 
 ... Work in progress
