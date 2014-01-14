@@ -5,3 +5,4 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 apt-get update
 apt-get install -y curl
 
+# vim: set ts=2 sw=2:

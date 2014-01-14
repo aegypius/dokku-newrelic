@@ -1,33 +1,35 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
-APP=$1; 
+APP=$1;
 
 if [[ -f "$DOKKU_ROOT/$APP/NEW_RELIC" ]]; then
 
-	CURL_OPTS=
-	while read line 
-	do
+  CURL_OPTS=
+  while read line
+  do
 
-		key=${line%*=*}
-		val=${line##*=}
+    key=${line%*=*}
+    val=${line##*=}
 
-		if [[ ! -z "$val" ]]; then 
-			case $key in
-				api_key)
-					CURL_OPTS+=" --header x-api-key:$val"
-					;;
-				app_name | application_id |	description | revision | changelog | user )
-					CURL_OPTS+=" --data deployment[$key]=$val"
-					;;	
-			esac
-		fi
-	done < $DOKKU_ROOT/$APP/NEW_RELIC;
+    if [[ ! -z "$val" ]]; then
+      case $key in
+        api_key)
+          CURL_OPTS+=" --header x-api-key:$val"
+          ;;
+        app_name | application_id | description | revision | changelog | user )
+          CURL_OPTS+=" --data deployment[$key]=$val"
+          ;;
+      esac
+    fi
+  done < $DOKKU_ROOT/$APP/NEW_RELIC;
 
-	http_status=`curl --include --silent $CURL_OPTS https://api.newrelic.com/deployments.xml | grep HTTP/1.1 | awk {'print $2'}`
-	if [ $http_status -ne 201 ]; then 
-		echo "New Relic: Deployment notification failed."
-	else
-		echo "New Relic: Deployment notification submited."
-	fi
+  http_status=`curl --include --silent $CURL_OPTS https://api.newrelic.com/deployments.xml | grep HTTP/1.1 | awk {'print $2'}`
+  if [ $http_status -ne 201 ]; then
+    echo "New Relic: Deployment notification failed."
+  else
+    echo "New Relic: Deployment notification submited."
+  fi
 
 fi
+
+# vim: set ts=2 sw=2:
