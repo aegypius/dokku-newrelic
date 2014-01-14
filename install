@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+# Setup curl to post deployments payloads
+apt-get update
+apt-get install -y curl
+
