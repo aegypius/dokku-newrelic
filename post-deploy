@@ -22,7 +22,7 @@ if [[ -f "$DOKKU_ROOT/$APP/ENV" ]]; then
     fi
   done < $DOKKU_ROOT/$APP/ENV;
 
-  if [[ ! -z "$CURL_OPTS"]]; then
+  if [[ ! -z "$CURL_OPTS" ]]; then
     http_status=`curl --include --silent $CURL_OPTS https://api.newrelic.com/deployments.xml | grep HTTP/1.1 | awk {'print $2'}`
     if [ $http_status -ne 201 ]; then
      echo "New Relic: Deployment notification failed."
