@@ -15,7 +15,7 @@ if [[ -f "$DOKKU_ROOT/$APP/ENV" ]]; then
         NEW_RELIC_APP_NAME)
           CURL_OPTS+=" --data deployment[app_name]=${val//\'/}";
         ;;
-        NEW_RELIC_LICENSE_KEY)
+        NEW_RELIC_API_KEY)
           CURL_OPTS+=" --header x-api-key:${val//\'/}";
         ;;
       esac
