@@ -13,10 +13,10 @@ if [[ -f "$DOKKU_ROOT/$APP/ENV" ]]; then
     if [[ ! -z "$val" ]]; then
       case $key in
         NEW_RELIC_APP_NAME)
-          CURL_OPTS+=" --data deployment[app_name]=${val}";
+          CURL_OPTS+=" --data deployment[app_name]=${val//\'/}";
         ;;
         NEW_RELIC_LICENSE_KEY)
-          CURL_OPTS+=" --header x-api-key:${val}";
+          CURL_OPTS+=" --header x-api-key:${val//\'/}";
         ;;
       esac
     fi
