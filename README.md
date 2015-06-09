@@ -4,13 +4,11 @@
 
 To track your deployments on New Relic you need to configure two environments vars:
 
-    dokku config:set appname NEW_RELIC_LICENSE_KEY=your-license-key
+    dokku config:set appname NEW_RELIC_API_KEY=your-api-key
 
 And at least one of these:
 
     dokku config:set appname NEW_RELIC_APP_NAME=your-application-name
-or 
-    dokku config:set appname NEW_RELIC_APPLICATION_ID=your-application-id
 
 Like any configuration vars in dokku they will be exported so you can use it in your
 application tracking.
